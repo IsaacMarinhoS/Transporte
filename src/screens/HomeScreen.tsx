@@ -2,6 +2,7 @@ import { Text, View, FlatList, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../styles/home';
 import QRCode from 'react-native-qrcode-svg';
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
     return (
@@ -51,7 +52,7 @@ export default function HomeScreen() {
 
                             <View style={styles.dadosTitular}>
                                 <Text style={styles.nomeTitular}>
-                                    Isaac Silveira
+                                    Junior Silveira
                                 </Text>
 
                                 <Text style={styles.idTitular}>
@@ -137,8 +138,9 @@ export default function HomeScreen() {
                             </View>
 
                             {/* BOTÃO */}
-                            <Pressable style={styles.botaoApresentar}>
-
+                            <Pressable style={styles.botaoApresentar}onPress={() => router.push('/passedigital')}>
+              
+             
                                 <Ionicons
                                     name="scan-outline"
                                     size={20}

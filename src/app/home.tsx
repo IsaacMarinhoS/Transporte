@@ -3,9 +3,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 
+
 import { styles } from '../styles/home';
 
 import HomeScreen from '../screens/HomeScreen';
+
+import SuporteScreen from '../screens/SuporteScreen';
+import MapaScreen from '@/screens/MapaScreen';
 
 export default function Home() {
 
@@ -38,7 +42,13 @@ export default function Home() {
             {/* CONTEÚDO */}
             <View style={{ flex: 1 }}>
 
-                {aba === 'home' && <HomeScreen />}
+                <View style={{ flex: 1 }}>
+                    {aba === 'home' && <HomeScreen />}
+                    {aba === 'mapa' && <MapaScreen />} 
+                    {/* {aba === 'planos' && <PlanosScreen />} */}
+                    {aba === 'suporte' && <SuporteScreen />}
+                    {/* {aba === 'perfil' && <PerfilScreen />} */}
+                </View>
 
             </View>
 
