@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { ThemePalette } from '@/constants/theme';
 
-export const styles = StyleSheet.create({
+export const createChatStyles = (colors: ThemePalette) => StyleSheet.create({
 
     // =====================================================
     // TELA PRINCIPAL
@@ -8,7 +9,7 @@ export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#f7f9fb',
+        backgroundColor: colors.background,
     },
 
 
@@ -18,9 +19,9 @@ export const styles = StyleSheet.create({
 
     header: {
         height: 100,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderBottomWidth: 1,
-        borderBottomColor: '#e2e8f0',
+        borderBottomColor: colors.border,
 
         flexDirection: 'row',
         alignItems: 'center',
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
         width: 44,
         height: 44,
         borderRadius: 22,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
 
         alignItems: 'center',
         justifyContent: 'center',
@@ -79,11 +80,11 @@ export const styles = StyleSheet.create({
     nomeSuporte: {
         fontSize: 15,
         fontWeight: '600',
-        color: '#0f172a',
+        color: colors.text,
     },
 
     badgeAtendente: {
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         borderRadius: 20,
         paddingHorizontal: 7,
         paddingVertical: 3,
@@ -98,7 +99,7 @@ export const styles = StyleSheet.create({
 
     subtituloSuporte: {
         fontSize: 12,
-        color: '#64748b',
+        color: colors.textSecondary,
         marginTop: 2,
     },
 
@@ -134,7 +135,7 @@ export const styles = StyleSheet.create({
 
     dataContainer: {
         alignSelf: 'center',
-        backgroundColor: '#e2e8f0',
+        backgroundColor: colors.backgroundSelected,
         borderRadius: 20,
 
         paddingHorizontal: 11,
@@ -146,7 +147,7 @@ export const styles = StyleSheet.create({
     dataTexto: {
         fontSize: 11,
         fontWeight: '500',
-        color: '#64748b',
+        color: colors.textSecondary,
     },
 
 
@@ -155,14 +156,14 @@ export const styles = StyleSheet.create({
     // =====================================================
 
     cardBoasVindas: {
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 18,
 
         padding: 16,
         alignItems: 'center',
 
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
 
         shadowColor: '#000000',
         shadowOffset: {
@@ -181,7 +182,7 @@ export const styles = StyleSheet.create({
         width: 46,
         height: 46,
         borderRadius: 23,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
 
         alignItems: 'center',
         justifyContent: 'center',
@@ -192,7 +193,7 @@ export const styles = StyleSheet.create({
     textoBoasVindas: {
         fontSize: 13,
         lineHeight: 19,
-        color: '#475569',
+        color: colors.textSecondary,
         textAlign: 'center',
     },
 
@@ -212,7 +213,7 @@ export const styles = StyleSheet.create({
         width: 32,
         height: 32,
         borderRadius: 16,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
 
         alignItems: 'center',
         justifyContent: 'center',
@@ -225,7 +226,7 @@ export const styles = StyleSheet.create({
     },
 
     balaoRecebido: {
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         borderRadius: 17,
         borderBottomLeftRadius: 5,
@@ -234,7 +235,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 11,
 
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
 
         shadowColor: '#000000',
         shadowOffset: {
@@ -250,12 +251,12 @@ export const styles = StyleSheet.create({
     textoMensagemRecebida: {
         fontSize: 13,
         lineHeight: 19,
-        color: '#334155',
+        color: colors.text,
     },
 
     horarioMensagem: {
         fontSize: 10,
-        color: '#94a3b8',
+        color: colors.textSecondary,
         textAlign: 'right',
         marginTop: 5,
     },
@@ -312,7 +313,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
 
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
 
         borderRadius: 12,
 
@@ -340,12 +341,12 @@ export const styles = StyleSheet.create({
     tituloMapa: {
         fontSize: 12,
         fontWeight: '700',
-        color: '#0f172a',
+        color: colors.text,
     },
 
     subtituloMapa: {
         fontSize: 10,
-        color: '#64748b',
+        color: colors.textSecondary,
         marginTop: 2,
     },
 
@@ -355,7 +356,7 @@ export const styles = StyleSheet.create({
     // =====================================================
 
     digitando: {
-        backgroundColor: '#e2e8f0',
+        backgroundColor: colors.backgroundSelected,
 
         borderRadius: 16,
         borderBottomLeftRadius: 5,
@@ -370,13 +371,13 @@ export const styles = StyleSheet.create({
     textoDigitando: {
         fontSize: 11,
         fontStyle: 'italic',
-        color: '#64748b',
+        color: colors.textSecondary,
     },
 
     pontosDigitando: {
         fontSize: 14,
         fontWeight: '700',
-        color: '#64748b',
+        color: colors.textSecondary,
         marginLeft: 5,
         letterSpacing: 1,
     },
@@ -389,7 +390,7 @@ export const styles = StyleSheet.create({
     footer: {
         height: 110,
 
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         borderTopWidth: 1,
         borderTopColor: '#e2e8f0',
@@ -426,7 +427,7 @@ export const styles = StyleSheet.create({
         minHeight: 44,
         maxHeight: 100,
 
-        backgroundColor: '#f1f5f9',
+        backgroundColor: colors.backgroundElement,
 
         borderRadius: 22,
 
@@ -438,7 +439,7 @@ export const styles = StyleSheet.create({
 
     input: {
         fontSize: 14,
-        color: '#334155',
+        color: colors.text,
 
         paddingTop: 10,
         paddingBottom: 10,

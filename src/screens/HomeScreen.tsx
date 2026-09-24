@@ -1,10 +1,13 @@
 import { Text, View, FlatList, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { styles } from '../styles/home';
+import { createHomeStyles } from '../styles/home';
+import { useAppTheme } from '@/contexts/ThemeContext';
 import QRCode from 'react-native-qrcode-svg';
 import { router } from 'expo-router';
 
 export default function HomeScreen() {
+    const { colors } = useAppTheme();
+    const styles = createHomeStyles(colors);
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}

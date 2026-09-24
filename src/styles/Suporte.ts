@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { ThemePalette } from '@/constants/theme';
 
-export const styles = StyleSheet.create({
+export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
 
     // =====================================================
     // CONTAINER PRINCIPAL DA TELA
@@ -8,7 +9,7 @@ export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#f7f9fb',
+        backgroundColor: colors.background,
     },
 
     conteudo: {
@@ -36,10 +37,10 @@ export const styles = StyleSheet.create({
     // =====================================================
 
     card: {
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 18,
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
         padding: 16,
 
         // Sombra
@@ -85,7 +86,7 @@ export const styles = StyleSheet.create({
     tituloCard: {
         fontSize: 16,
         fontWeight: '700',
-        color: '#0f172a',
+        color: colors.text,
         lineHeight: 21,
     },
 
@@ -93,7 +94,7 @@ export const styles = StyleSheet.create({
     descricaoCard: {
         fontSize: 12,
         fontWeight: '400',
-        color: '#64748b',
+        color: colors.textSecondary,
         lineHeight: 17,
         marginTop: 4,
     },
@@ -133,7 +134,7 @@ export const styles = StyleSheet.create({
     // Cada linha de horário
     linhaHorario: {
         minHeight: 50,
-        backgroundColor: '#f8fafc',
+        backgroundColor: colors.backgroundElement,
         borderRadius: 11,
         paddingHorizontal: 14,
 
@@ -152,7 +153,7 @@ export const styles = StyleSheet.create({
     nomeDia: {
         fontSize: 13,
         fontWeight: '600',
-        color: '#0f172a',
+        color: colors.text,
         marginLeft: 9,
     },
 
@@ -160,7 +161,7 @@ export const styles = StyleSheet.create({
     horario: {
         fontSize: 13,
         fontWeight: '700',
-        color: '#0f172a',
+        color: colors.text,
     },
 
 
@@ -193,7 +194,7 @@ export const styles = StyleSheet.create({
     textoPlantao: {
         fontSize: 12,
         fontWeight: '400',
-        color: '#334155',
+        color: colors.text,
         lineHeight: 17,
         marginTop: 7,
     },
@@ -218,10 +219,10 @@ export const styles = StyleSheet.create({
     // =====================================================
 
     cardCanal: {
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 18,
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
         padding: 16,
         marginBottom: 12,
 
@@ -268,14 +269,14 @@ export const styles = StyleSheet.create({
     tituloCanal: {
         fontSize: 16,
         fontWeight: '600',
-        color: '#0f172a',
+        color: colors.text,
     },
 
     // Texto secundário
     descricaoCanal: {
         fontSize: 12,
         fontWeight: '400',
-        color: '#64748b',
+        color: colors.textSecondary,
         lineHeight: 17,
         marginTop: 4,
     },
@@ -306,7 +307,7 @@ export const styles = StyleSheet.create({
     textoOnline: {
         fontSize: 10,
         fontWeight: '500',
-        color: '#334155',
+        color: colors.text,
     },
 
 
@@ -351,7 +352,7 @@ export const styles = StyleSheet.create({
     rotuloTelefone: {
         fontSize: 11,
         fontWeight: '700',
-        color: '#64748b',
+        color: colors.textSecondary,
         letterSpacing: 0.5,
     },
 
@@ -359,7 +360,7 @@ export const styles = StyleSheet.create({
     numeroTelefone: {
         fontSize: 20,
         fontWeight: '800',
-        color: '#0f172a',
+        color: colors.text,
         marginTop: 2,
         letterSpacing: 0.5,
     },
@@ -389,7 +390,7 @@ export const styles = StyleSheet.create({
     textoTag: {
         fontSize: 12,
         fontWeight: '600',
-        color: '#475569',
+        color: colors.textSecondary,
     },
 
     // Botão "Ligar Agora"
@@ -427,7 +428,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         fontSize: 12,
         fontWeight: '400',
-        color: '#64748b',
+        color: colors.textSecondary,
         lineHeight: 17,
         marginRight: 12,
     },
@@ -443,9 +444,9 @@ export const styles = StyleSheet.create({
         width: 38,
         height: 38,
         borderRadius: 10,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
 
         alignItems: 'center',
         justifyContent: 'center',

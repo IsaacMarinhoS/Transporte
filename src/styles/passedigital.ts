@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { ThemePalette } from '@/constants/theme';
 
-export const styles = StyleSheet.create({
+export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f9fb',
+    backgroundColor: colors.background,
   },
 
   /* MENU SUPERIOR */
   menuSuperior: {
     minHeight: 70,
-    backgroundColor: '#f7f9fb',
+    backgroundColor: colors.background,
     paddingHorizontal: 18,
     paddingBottom: 10,
     flexDirection: 'row',
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 18,
     fontWeight: '700',
-    color: '#0f172a',
+    color: colors.text,
   },
   statusAtivo: {
     height: 28,
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
     height: 32,
     paddingHorizontal: 14,
     borderRadius: 16,
-    backgroundColor: '#e2e8f0',
+    backgroundColor: colors.backgroundSelected,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -73,7 +74,7 @@ export const styles = StyleSheet.create({
   textoModo: {
     marginLeft: 6,
     fontSize: 11,
-    color: '#475569',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
 
@@ -87,7 +88,7 @@ export const styles = StyleSheet.create({
   carteirinhaRotacionada: {
     width: 480,
     height: 310,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.card,
     borderRadius: 22,
     flexDirection: 'column',
     overflow: 'hidden',
@@ -135,7 +136,7 @@ export const styles = StyleSheet.create({
     height: 26,
     paddingHorizontal: 10,
     borderRadius: 13,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.card,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -184,7 +185,7 @@ export const styles = StyleSheet.create({
   nomeTitular: {
     fontSize: 17,
     fontWeight: '800',
-    color: '#0f172a',
+    color: colors.text,
     textAlign: 'left',
   },
   categoriaUsuario: {
@@ -196,7 +197,7 @@ export const styles = StyleSheet.create({
   },
   documentoProtegido: {
     fontSize: 11,
-    color: '#64748b',
+    color: colors.textSecondary,
     marginTop: 1,
     textAlign: 'left',
   },
@@ -207,7 +208,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 8,
     borderRadius: 8,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: colors.backgroundElement,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -221,18 +222,18 @@ export const styles = StyleSheet.create({
   rotuloCobertura: {
     fontSize: 7,
     fontWeight: '800',
-    color: '#64748b',
+    color: colors.textSecondary,
     textAlign: 'left',
   },
   tituloBeneficio: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#0f172a',
+    color: colors.text,
     textAlign: 'left',
   },
   regraValidade: {
     fontSize: 8,
-    color: '#475569',
+    color: colors.textSecondary,
     textAlign: 'left',
   },
 
@@ -251,7 +252,7 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 11,
     fontWeight: '600',
-    color: '#475569',
+    color: colors.textSecondary,
   },
   contadorCota: {
     fontSize: 11,
@@ -269,9 +270,9 @@ export const styles = StyleSheet.create({
   containerQR: {
     padding: 8,
     borderRadius: 14,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.card,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: colors.border,
     position: 'relative',
   },
   checkQR: {
@@ -292,7 +293,7 @@ export const styles = StyleSheet.create({
   codigoContingencia: {
     fontSize: 12,
     fontWeight: '800',
-    color: '#0f172a',
+    color: colors.text,
     textAlign: 'left',
   },
   tokenDinamico: {
@@ -303,7 +304,7 @@ export const styles = StyleSheet.create({
   textoToken: {
     marginLeft: 4,
     fontSize: 10,
-    color: '#64748b',
+    color: colors.textSecondary,
     textAlign: 'left',
   },
 
@@ -316,6 +317,6 @@ export const styles = StyleSheet.create({
   textoInstrucao: {
     marginLeft: 6,
     fontSize: 11,
-    color: '#475569',
+    color: colors.textSecondary,
   },
 });

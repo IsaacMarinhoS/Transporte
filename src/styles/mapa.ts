@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { ThemePalette } from '@/constants/theme';
 
-export const styles = StyleSheet.create({
+export const createMapaStyles = (colors: ThemePalette) => StyleSheet.create({
 
     // =================================================
     // CONTAINER
@@ -8,7 +9,7 @@ export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#f7f9fb',
+        backgroundColor: colors.background,
     },
 
     areaMapa: {
@@ -31,10 +32,10 @@ export const styles = StyleSheet.create({
 
     busca: {
         height: 52,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 18,
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
 
         flexDirection: 'row',
         alignItems: 'center',
@@ -57,7 +58,7 @@ export const styles = StyleSheet.create({
         marginLeft: 10,
 
         fontSize: 13,
-        color: '#0f172a',
+        color: colors.text,
     },
 
     botaoFiltro: {
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
         height: 38,
         borderRadius: 12,
 
-        backgroundColor: '#f2f4f6',
+        backgroundColor: colors.backgroundElement,
 
         alignItems: 'center',
         justifyContent: 'center',
@@ -120,10 +121,10 @@ export const styles = StyleSheet.create({
 
         borderRadius: 20,
 
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
 
         flexDirection: 'row',
         alignItems: 'center',
@@ -132,7 +133,7 @@ export const styles = StyleSheet.create({
     textoFiltro: {
         marginLeft: 7,
 
-        color: '#64748b',
+        color: colors.textSecondary,
 
         fontSize: 12,
         fontWeight: '600',
@@ -165,7 +166,7 @@ export const styles = StyleSheet.create({
 
         borderRadius: 21,
 
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         alignItems: 'center',
         justifyContent: 'center',
@@ -196,7 +197,7 @@ export const styles = StyleSheet.create({
 
         borderRadius: 15,
 
-        backgroundColor: 'rgba(255,255,255,0.94)',
+        backgroundColor: colors.card,
 
         flexDirection: 'row',
         alignItems: 'center',
@@ -227,7 +228,7 @@ export const styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: '500',
 
-        color: '#64748b',
+        color: colors.textSecondary,
     },
 
 
@@ -243,7 +244,7 @@ export const styles = StyleSheet.create({
 
     height: 390,
 
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.card,
 
     borderTopLeftRadius: 28,
     borderTopRightRadius: 28,
@@ -283,7 +284,7 @@ export const styles = StyleSheet.create({
     cardTrajeto: {
         minHeight: 72,
 
-        backgroundColor: '#f2f4f6',
+        backgroundColor: colors.backgroundElement,
 
         borderRadius: 16,
 
@@ -314,7 +315,7 @@ export const styles = StyleSheet.create({
 
         borderRadius: 6,
 
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         borderWidth: 3,
         borderColor: '#02719c',
@@ -344,14 +345,14 @@ export const styles = StyleSheet.create({
 
         letterSpacing: 1,
 
-        color: '#94a3b8',
+        color: colors.textSecondary,
     },
 
     tituloTrajeto: {
         fontSize: 16,
         fontWeight: '700',
 
-        color: '#0f172a',
+        color: colors.text,
 
         marginTop: 2,
     },
@@ -359,7 +360,7 @@ export const styles = StyleSheet.create({
     subtituloTrajeto: {
         fontSize: 11,
 
-        color: '#64748b',
+        color: colors.textSecondary,
 
         marginTop: 3,
     },

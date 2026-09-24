@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { ThemePalette } from '@/constants/theme';
 
-export const styles = StyleSheet.create({
+export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
 
     // Ocupa a tela inteira
     container: {
         flex: 1,
-        backgroundColor: '#f6f6f7',
+        backgroundColor: colors.background,
     },
 
 
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         minHeight: 80,
 
-        backgroundColor: '#fdfafa',
+        backgroundColor: colors.backgroundElement,
 
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 110,
 
-        backgroundColor: '#fdfafa',
+        backgroundColor: colors.backgroundElement,
 
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -100,7 +101,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 100,
 
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
 
         flexDirection: 'row',
         alignItems: 'center',
@@ -127,12 +128,12 @@ export const styles = StyleSheet.create({
     tituloAviso: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: '#333333',
+        color: colors.text,
     },
 
     textoAviso: {
         fontSize: 12,
-        color: '#777777',
+        color: colors.textSecondary,
         marginTop: 3,
     },
 
@@ -149,7 +150,7 @@ export const styles = StyleSheet.create({
     cardPlano: {
         width: 280,
         height: 295,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 12,
         marginRight: 15,
         padding: 20,
@@ -160,12 +161,12 @@ export const styles = StyleSheet.create({
     nomePlano: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#333333',
+        color: colors.text,
     },
 
     descricaoPlano: {
         fontSize: 12,
-        color: '#777777',
+        color: colors.textSecondary,
         marginTop: 5,
     },
 
@@ -178,7 +179,7 @@ export const styles = StyleSheet.create({
 
     mensalidade: {
         fontSize: 12,
-        color: '#777777',
+        color: colors.textSecondary,
     },
 
     beneficios: {
@@ -187,7 +188,7 @@ export const styles = StyleSheet.create({
 
     beneficio: {
         fontSize: 12,
-        color: '#555555',
+        color: colors.textSecondary,
         marginBottom: 4,
     },
 
@@ -209,10 +210,10 @@ export const styles = StyleSheet.create({
     passeCard: {
         width: '100%',
         marginTop: 25,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 16,
         borderWidth: 1,
-        borderColor: '#e2e8f0',
+        borderColor: colors.border,
         overflow: 'hidden',
     },
 
@@ -304,7 +305,7 @@ export const styles = StyleSheet.create({
 
     qrContainer: {
         width: '100%',
-        backgroundColor: '#f8fafc',
+        backgroundColor: colors.backgroundElement,
         borderRadius: 12,
         padding: 12,
         flexDirection: 'row',
@@ -314,7 +315,7 @@ export const styles = StyleSheet.create({
     qrBox: {
         width: 84,
         height: 84,
-        backgroundColor: '#ffffff',
+        backgroundColor: colors.card,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
@@ -328,13 +329,13 @@ export const styles = StyleSheet.create({
     tituloApresentar: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: '#0f172a',
+        color: colors.text,
     },
 
     instrucaoQr: {
         fontSize: 12,
         lineHeight: 17,
-        color: '#64748b',
+        color: colors.textSecondary,
         marginTop: 4,
     },
 
@@ -360,13 +361,13 @@ export const styles = StyleSheet.create({
 
     textoViagens: {
         fontSize: 13,
-        color: '#475569',
+        color: colors.textSecondary,
     },
 
     numeroViagens: {
         fontSize: 14,
         fontWeight: 'bold',
-        color: '#0f172a',
+        color: colors.text,
     },
 
     trilhoProgresso: {
@@ -393,7 +394,7 @@ export const styles = StyleSheet.create({
 
     planoAtual: {
         fontSize: 12,
-        color: '#64748b',
+        color: colors.textSecondary,
     },
 
     restantes: {

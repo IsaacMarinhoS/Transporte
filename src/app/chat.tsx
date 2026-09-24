@@ -15,11 +15,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 
-import { styles } from '../styles/chat';
+import { createChatStyles } from '../styles/chat';
+import { useAppTheme } from '@/contexts/ThemeContext';
 
 export default function Chat() {
 
     const [mensagem, setMensagem] = useState('');
+    const { colors } = useAppTheme();
+    const styles = createChatStyles(colors);
 
     const insets = useSafeAreaInsets();
 
@@ -48,7 +51,7 @@ export default function Chat() {
                     <Ionicons
                         name="arrow-back"
                         size={23}
-                        color="#1e293b"
+                        color={colors.text}
                     />
                 </Pressable>
 
@@ -350,7 +353,7 @@ export default function Chat() {
                     <Ionicons
                         name="attach-outline"
                         size={23}
-                        color="#64748b"
+                        color={colors.textSecondary}
                     />
 
                 </Pressable>
@@ -362,7 +365,7 @@ export default function Chat() {
                     <TextInput
                         style={styles.input}
                         placeholder="Digite sua mensagem..."
-                        placeholderTextColor="#94a3b8"
+                        placeholderTextColor={colors.textSecondary}
                         value={mensagem}
                         onChangeText={setMensagem}
                         multiline

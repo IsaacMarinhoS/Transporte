@@ -2,9 +2,12 @@ import { ScrollView, Text, View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
-import { styles } from '../styles/Suporte';
+import { createSuporteStyles } from '../styles/Suporte';
+import { useAppTheme } from '@/contexts/ThemeContext';
 
 export default function SuporteScreen() {
+    const { colors } = useAppTheme();
+    const styles = createSuporteStyles(colors);
     return (
         <ScrollView
             style={styles.container}

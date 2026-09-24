@@ -16,9 +16,13 @@ import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
 import { WebView } from 'react-native-webview';
 
-import { styles } from '../styles/mapa';
+import { createMapaStyles } from '../styles/mapa';
+import { useAppTheme } from '@/contexts/ThemeContext';
 
 export default function MapaScreen() {
+
+    const { colors } = useAppTheme();
+    const styles = createMapaStyles(colors);
 
     const painelY = useRef(new Animated.Value(0)).current;
 
@@ -459,7 +463,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
 
                 {/* MAPA */}
 
-                <WebView
+            <WebView
                     ref={webViewRef}
                     originWhitelist={['*']}
                     source={{ html: mapaHTML }}
