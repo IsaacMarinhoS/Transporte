@@ -41,6 +41,7 @@ export default function ModoEscuro() {
           </Pressable>
         );
       })}
+
     </View>
   );
 }

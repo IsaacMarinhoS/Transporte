@@ -15,10 +15,6 @@ export default function HomeScreen() {
         >
 
             {/* CONTEÚDO COM ROLAGEM */}
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.conteudoScroll}
-            >
                 {/* CONTEÚDO DA HOME */}
 
 
@@ -81,6 +77,8 @@ export default function HomeScreen() {
                                     <QRCode
                                         value="VTC-84920-ISAAC-SILVEIRA"
                                         size={68}
+                                        color="#0f172a"
+                                        backgroundColor="#ffffff"
                                     />
                                 </View>
 
@@ -98,7 +96,7 @@ export default function HomeScreen() {
                                         <Ionicons
                                             name="radio-outline"
                                             size={13}
-                                            color="#02719c"
+                                            color={colors.accent}
                                         />
 
                                         <Text style={styles.textoValidacao}>
@@ -249,7 +247,7 @@ export default function HomeScreen() {
                         <Ionicons
                             name="checkmark-circle-outline"
                             size={25}
-                            color="#02719c"
+                            color={colors.accent}
                             marginLeft={10}
                         />
 
@@ -270,9 +268,6 @@ export default function HomeScreen() {
 
                     </View>
                 </View>
-
-
-            </ScrollView>
 
 
         </ScrollView>

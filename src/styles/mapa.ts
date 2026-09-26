@@ -269,7 +269,7 @@ export const createMapaStyles = (colors: ThemePalette) => StyleSheet.create({
 
         borderRadius: 4,
 
-        backgroundColor: '#cbd5e1',
+        backgroundColor: colors.border,
 
         alignSelf: 'center',
 
@@ -318,7 +318,7 @@ export const createMapaStyles = (colors: ThemePalette) => StyleSheet.create({
         backgroundColor: colors.card,
 
         borderWidth: 3,
-        borderColor: '#02719c',
+        borderColor: colors.accent,
     },
 
     iconeDestino: {
@@ -327,7 +327,7 @@ export const createMapaStyles = (colors: ThemePalette) => StyleSheet.create({
 
         borderRadius: 19,
 
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
 
         alignItems: 'center',
         justifyContent: 'center',

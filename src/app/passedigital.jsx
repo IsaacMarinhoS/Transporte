@@ -16,8 +16,8 @@ import { useAppTheme } from '@/contexts/ThemeContext';
 
 export default function PasseDigital() {
   const insets = useSafeAreaInsets();
-  const { colors } = useAppTheme();
-  const themedStyles = createPasseDigitalStyles(colors);
+  const { colors, isDark } = useAppTheme();
+  const themedStyles = createPasseDigitalStyles(colors, isDark);
 
   return (
     <View style={themedStyles.container}>
@@ -96,7 +96,7 @@ export default function PasseDigital() {
 
                 {/* BLOCO DE COBERTURA COMPACTADO */}
                 <View style={themedStyles.blocoCobertura}>
-                  <Ionicons name="flower-outline" size={15} color="#02719c" style={themedStyles.iconeCobertura} />
+                  <Ionicons name="flower-outline" size={15} color={colors.accent} style={themedStyles.iconeCobertura} />
                   <View style={themedStyles.infoCobertura}>
                     <Text style={themedStyles.rotuloCobertura}>COBERTURA AUTORIZADA</Text>
                     <Text style={themedStyles.tituloBeneficio}>Passe Livre • Rede Completa</Text>
@@ -109,7 +109,7 @@ export default function PasseDigital() {
                 {/* USO DIÁRIO */}
                 <View style={themedStyles.controleUso}>
                   <View style={themedStyles.usoEsquerda}>
-                    <Ionicons name="shield-checkmark-outline" size={15} color="#02719c" />
+                    <Ionicons name="shield-checkmark-outline" size={15} color={colors.accent} />
                     <Text style={themedStyles.textoUso}>Acesso Diário</Text>
                   </View>
                   <Text style={themedStyles.contadorCota}>1 de 2 viagens</Text>
@@ -122,7 +122,7 @@ export default function PasseDigital() {
                   <QRCode
                     value="VLC-8842-SP-MATEUS-SILVA"
                     size={120}
-                    color={colors.text}
+                    color="#0f172a"
                     backgroundColor="#ffffff"
                   />
                  
@@ -144,7 +144,7 @@ export default function PasseDigital() {
 
         {/* 4. RODAPÉ INFORMATIVO */}
         <View style={themedStyles.instrucao}>
-          <Ionicons name="radio-outline" size={18} color="#02719c" />
+          <Ionicons name="radio-outline" size={18} color={colors.accent} />
           <Text style={themedStyles.textoInstrucao}>
             Aproxime o QR Code do leitor da van ou terminal
           </Text>

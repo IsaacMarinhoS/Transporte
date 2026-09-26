@@ -29,7 +29,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     logo: {
         fontSize: 22,
         fontWeight: 'bold',
-        color: '#02719c',
+        color: colors.accent,
     },
 
 
@@ -61,7 +61,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     // Texto dos itens do menu
     textoMenu: {
         fontSize: 10,
-        color: '#02719c',
+        color: colors.accent,
         marginTop: 3,
     },
 
@@ -80,6 +80,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     tituloAvisos: {
         fontSize: 17,
         fontWeight: 'bold',
+        color: colors.text,
     },
 
 
@@ -87,7 +88,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     numeroAvisos: {
         fontSize: 10,
         fontWeight: 'bold',
-        color: '#02719c',
+        color: colors.accent,
     },
 
 
@@ -145,6 +146,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold',
         marginBottom: 12,
+        color: colors.text,
     },
 
     cardPlano: {
@@ -173,7 +175,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     precoPlano: {
         fontSize: 26,
         fontWeight: 'bold',
-        color: '#02719c',
+        color: colors.accent,
         marginTop: 10,
     },
 
@@ -194,7 +196,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
 
     botaoContratar: {
         height: 40,
-        backgroundColor: '#02719c',
+        backgroundColor: colors.accent,
         borderRadius: 7,
         alignItems: 'center',
         justifyContent: 'center',
@@ -315,7 +317,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     qrBox: {
         width: 84,
         height: 84,
-        backgroundColor: colors.card,
+        backgroundColor: '#ffffff',
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
@@ -348,7 +350,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     textoValidacao: {
         fontSize: 11,
         fontWeight: '600',
-        color: '#02719c',
+        color: colors.accent,
         marginLeft: 4,
     },
 
@@ -373,7 +375,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     trilhoProgresso: {
         width: '100%',
         height: 6,
-        backgroundColor: '#e2e8f0',
+        backgroundColor: colors.border,
         borderRadius: 10,
         marginTop: 8,
         overflow: 'hidden',
@@ -400,7 +402,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     restantes: {
         fontSize: 12,
         fontWeight: '600',
-        color: '#02719c',
+        color: colors.accent,
     },
 
     botaoApresentar: {
@@ -430,7 +432,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 10,
-        backgroundColor: 'rgba(2, 113, 156, 0.12)',
+        backgroundColor: colors.accentSoft,
     },
 
 

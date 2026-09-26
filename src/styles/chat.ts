@@ -94,7 +94,7 @@ export const createChatStyles = (colors: ThemePalette) => StyleSheet.create({
     textoBadge: {
         fontSize: 10,
         fontWeight: '700',
-        color: '#02719c',
+        color: colors.accent,
     },
 
     subtituloSuporte: {
@@ -393,7 +393,7 @@ export const createChatStyles = (colors: ThemePalette) => StyleSheet.create({
         backgroundColor: colors.card,
 
         borderTopWidth: 1,
-        borderTopColor: '#e2e8f0',
+        borderTopColor: colors.border,
 
         paddingHorizontal: 12,
         paddingVertical: 10,

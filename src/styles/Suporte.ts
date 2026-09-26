@@ -27,7 +27,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
         fontSize: 11,
         fontWeight: '800',
         letterSpacing: 1.5,
-        color: '#02719c',
+        color: colors.accent,
         marginBottom: 12,
     },
 
@@ -70,7 +70,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
         width: 44,
         height: 44,
         borderRadius: 12,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -105,7 +105,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     // =====================================================
 
     badge: {
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         borderRadius: 20,
         paddingHorizontal: 9,
         paddingVertical: 6,
@@ -116,7 +116,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     textoBadge: {
         fontSize: 10,
         fontWeight: '600',
-        color: '#02719c',
+        color: colors.accent,
         lineHeight: 13,
         textAlign: 'center',
     },
@@ -170,7 +170,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     // =====================================================
 
     plantao: {
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         borderRadius: 12,
         padding: 14,
         marginTop: 14,
@@ -186,7 +186,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     tituloPlantao: {
         fontSize: 12,
         fontWeight: '700',
-        color: '#02719c',
+        color: colors.accent,
         marginLeft: 8,
     },
 
@@ -208,7 +208,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
         fontSize: 11,
         fontWeight: '700',
         letterSpacing: 1.5,
-        color: '#02719c',
+        color: colors.accent,
         marginTop: 24,
         marginBottom: 12,
     },
@@ -253,7 +253,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
         width: 44,
         height: 44,
         borderRadius: 12,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -289,7 +289,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     badgeOnline: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#f1f5f9',
+        backgroundColor: colors.backgroundElement,
         borderRadius: 20,
         paddingHorizontal: 9,
         paddingVertical: 7,
@@ -317,7 +317,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
 
     botaoChat: {
         height: 44,
-        backgroundColor: '#02719c',
+        backgroundColor: colors.accent,
         borderRadius: 12,
         marginTop: 16,
 
@@ -380,7 +380,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     tagGratuita: {
         flex: 1,
         height: 44,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: colors.backgroundElement,
         borderRadius: 10,
 
         alignItems: 'center',
@@ -397,7 +397,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     botaoLigar: {
         flex: 1,
         height: 44,
-        backgroundColor: '#e0f2fe',
+        backgroundColor: colors.accentSoft,
         borderRadius: 12,
 
         flexDirection: 'row',
@@ -408,7 +408,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     textoLigar: {
         fontSize: 13,
         fontWeight: '700',
-        color: '#02719c',
+        color: colors.accent,
         marginLeft: 7,
     },
 

@@ -26,7 +26,7 @@ function PlanCard({ title, description, price, detail, benefits, icon, tag, feat
           <Ionicons name={icon} size={15} color={colors.accent} />
           <Text style={[styles.categoryText, { color: colors.accent }]}>{tag}</Text>
         </View>
-        {featured && <View style={[styles.featuredTag, { backgroundColor: colors.accent }]}><Ionicons name="star" size={12} color="#fff" /><Text style={styles.featuredText}>MAIS ESCOLHIDO</Text></View>}
+        {featured && <View style={[styles.featuredTag, { backgroundColor: '#02719c' }]}><Ionicons name="star" size={12} color="#fff" /><Text style={styles.featuredText}>MAIS ESCOLHIDO</Text></View>}
       </View>
       <Text style={[styles.planTitle, { color: colors.text }]}>{title}</Text>
       <Text style={[styles.planDescription, { color: colors.textSecondary }]}>{description}</Text>

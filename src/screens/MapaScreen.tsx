@@ -21,12 +21,13 @@ import { useAppTheme } from '@/contexts/ThemeContext';
 
 export default function MapaScreen() {
 
-    const { colors } = useAppTheme();
+    const { colors, isDark } = useAppTheme();
     const styles = createMapaStyles(colors);
 
     const painelY = useRef(new Animated.Value(0)).current;
 
-    const [posicaoPainel, setPosicaoPainel] = useState(0);
+    const posicaoPainelRef = useRef(0);
+    const inicioArrastoRef = useRef(0);
 
     const POSICAO_ABERTO = 0;
     const POSICAO_MEIO = 220;
@@ -35,7 +36,11 @@ export default function MapaScreen() {
     const panResponder = useRef(
         PanResponder.create({
 
-            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponder: () => false,
+
+            onPanResponderGrant: () => {
+                inicioArrastoRef.current = posicaoPainelRef.current;
+            },
 
             onMoveShouldSetPanResponder: (_, gestureState) => {
                 return Math.abs(gestureState.dy) > 5;
@@ -43,7 +48,7 @@ export default function MapaScreen() {
 
             onPanResponderMove: (_, gestureState) => {
 
-                let novaPosicao = posicaoPainel + gestureState.dy;
+                let novaPosicao = inicioArrastoRef.current + gestureState.dy;
 
                 novaPosicao = Math.max(
                     POSICAO_ABERTO,
@@ -56,13 +61,14 @@ export default function MapaScreen() {
             onPanResponderRelease: (_, gestureState) => {
 
                 const deslocamento = gestureState.dy;
+                const posicaoAtual = posicaoPainelRef.current;
 
-                let novaPosicao = posicaoPainel;
+                let novaPosicao = posicaoAtual;
 
                 // Arrastou para cima
                 if (deslocamento < -50) {
 
-                    if (posicaoPainel === POSICAO_FECHADO) {
+                    if (posicaoAtual === POSICAO_FECHADO) {
                         novaPosicao = POSICAO_MEIO;
                     } else {
                         novaPosicao = POSICAO_ABERTO;
@@ -73,7 +79,7 @@ export default function MapaScreen() {
                 // Arrastou para baixo
                 else if (deslocamento > 50) {
 
-                    if (posicaoPainel === POSICAO_ABERTO) {
+                    if (posicaoAtual === POSICAO_ABERTO) {
                         novaPosicao = POSICAO_MEIO;
                     } else {
                         novaPosicao = POSICAO_FECHADO;
@@ -88,7 +94,7 @@ export default function MapaScreen() {
                     friction: 12,
                 }).start();
 
-                setPosicaoPainel(novaPosicao);
+                posicaoPainelRef.current = novaPosicao;
             },
 
         })
@@ -144,6 +150,22 @@ export default function MapaScreen() {
                 #map {
                     width: 100%;
                     height: 100%;
+                }
+
+                .leaflet-tile-pane {
+                    filter: ${isDark ? 'invert(90%) hue-rotate(180deg) brightness(0.75) contrast(0.9)' : 'none'};
+                }
+
+                .leaflet-popup-content-wrapper,
+                .leaflet-popup-tip {
+                    background: ${isDark ? '#18232d' : '#ffffff'};
+                    color: ${isDark ? '#ffffff' : '#0f172a'};
+                }
+
+                .leaflet-control-zoom a {
+                    background: ${isDark ? '#18232d' : '#ffffff'};
+                    color: ${isDark ? '#ffffff' : '#0f172a'};
+                    border-color: ${isDark ? '#344653' : '#cccccc'};
                 }
 
                 .van {
@@ -382,13 +404,13 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                         <Ionicons
                             name="search-outline"
                             size={21}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                         <TextInput
                             style={styles.inputBusca}
                             placeholder="Buscar parada, linha ou destino..."
-                            placeholderTextColor="#64748b"
+                            placeholderTextColor={colors.textSecondary}
                         />
 
                         <Pressable style={styles.botaoFiltro}>
@@ -396,7 +418,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                             <Ionicons
                                 name="options-outline"
                                 size={21}
-                                color="#02719c"
+                                color={colors.accent}
                             />
 
                         </Pressable>
@@ -432,7 +454,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                             <Ionicons
                                 name="navigate-outline"
                                 size={17}
-                                color="#64748b"
+                                color={colors.textSecondary}
                             />
 
                             <Text style={styles.textoFiltro}>
@@ -447,7 +469,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                             <Ionicons
                                 name="location-outline"
                                 size={17}
-                                color="#64748b"
+                                color={colors.textSecondary}
                             />
 
                             <Text style={styles.textoFiltro}>
@@ -484,7 +506,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                         <Ionicons
                             name="locate-outline"
                             size={21}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </Pressable>
@@ -495,7 +517,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                         <Ionicons
                             name="add"
                             size={22}
-                            color="#0f172a"
+                            color={colors.text}
                         />
 
                     </Pressable>
@@ -506,7 +528,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                         <Ionicons
                             name="remove"
                             size={22}
-                            color="#0f172a"
+                            color={colors.text}
                         />
 
                     </Pressable>
@@ -517,7 +539,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                         <Ionicons
                             name="git-merge-outline"
                             size={20}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </Pressable>
@@ -592,7 +614,7 @@ window.mostrarMinhaLocalizacao = function(latitude, longitude) {
                             <Ionicons
                                 name="flag-outline"
                                 size={19}
-                                color="#02719c"
+                                color={colors.accent}
                             />
 
                         </View>

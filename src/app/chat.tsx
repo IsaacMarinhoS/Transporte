@@ -64,7 +64,7 @@ export default function Chat() {
                         <Ionicons
                             name="headset-outline"
                             size={21}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                         <View style={styles.statusOnline} />
@@ -140,7 +140,7 @@ export default function Chat() {
                         <Ionicons
                             name="chatbubbles-outline"
                             size={23}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </View>
@@ -166,7 +166,7 @@ export default function Chat() {
                         <Ionicons
                             name="headset-outline"
                             size={17}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </View>
@@ -239,7 +239,7 @@ export default function Chat() {
                         <Ionicons
                             name="headset-outline"
                             size={17}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </View>
@@ -285,7 +285,7 @@ export default function Chat() {
                                 <Ionicons
                                     name="chevron-forward"
                                     size={19}
-                                    color="#02719c"
+                                    color={colors.accent}
                                 />
 
                             </Pressable>
@@ -313,7 +313,7 @@ export default function Chat() {
                         <Ionicons
                             name="headset-outline"
                             size={17}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                     </View>

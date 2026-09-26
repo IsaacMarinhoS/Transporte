@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { ThemePalette } from '@/constants/theme';
 
-export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.create({
+export const createPasseDigitalStyles = (colors: ThemePalette, isDark: boolean) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -39,7 +39,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
     height: 28,
     paddingHorizontal: 12,
     borderRadius: 14,
-    backgroundColor: '#d1fae5',
+    backgroundColor: isDark ? '#12372d' : '#d1fae5',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -53,7 +53,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
   textoAtivo: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#047857',
+    color: isDark ? '#6ee7b7' : '#047857',
   },
 
   /* MODO APRESENTAÇÃO */
@@ -150,7 +150,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
   textoValido: {
     fontSize: 9,
     fontWeight: '800',
-    color: '#02719c',
+    color: colors.accent,
   },
 
   /* CORPO PRINCIPAL */
@@ -191,7 +191,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
   categoriaUsuario: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#02719c',
+    color: colors.accent,
     marginTop: 1,
     textAlign: 'left',
   },
@@ -257,7 +257,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
   contadorCota: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#02719c',
+    color: colors.accent,
   },
 
   /* LADO DIREITO: QR CODE (EXPANDIDO) */
@@ -270,7 +270,7 @@ export const createPasseDigitalStyles = (colors: ThemePalette) => StyleSheet.cre
   containerQR: {
     padding: 8,
     borderRadius: 14,
-    backgroundColor: colors.card,
+    backgroundColor: '#ffffff',
     borderWidth: 1,
     borderColor: colors.border,
     position: 'relative',

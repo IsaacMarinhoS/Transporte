@@ -30,7 +30,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="chatbubble-outline"
                             size={22}
-                            color="#02719c"
+                            color={colors.accent}
                         />
                     </View>
 
@@ -82,7 +82,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="call-outline"
                             size={22}
-                            color="#02719c"
+                            color={colors.accent}
                         />
                     </View>
 
@@ -121,7 +121,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="call"
                             size={17}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                         <Text style={styles.textoLigar}>
@@ -148,7 +148,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="time-outline"
                             size={24}
-                            color="#02719c"
+                            color={colors.accent}
                         />
                     </View>
 
@@ -181,7 +181,7 @@ export default function SuporteScreen() {
                             <Ionicons
                                 name="calendar-outline"
                                 size={19}
-                                color="#64748b"
+                                color={colors.textSecondary}
                             />
 
                             <Text style={styles.nomeDia}>
@@ -202,7 +202,7 @@ export default function SuporteScreen() {
                             <Ionicons
                                 name="calendar-outline"
                                 size={19}
-                                color="#64748b"
+                                color={colors.textSecondary}
                             />
 
                             <Text style={styles.nomeDia}>
@@ -226,7 +226,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="shield-checkmark-outline"
                             size={20}
-                            color="#02719c"
+                            color={colors.accent}
                         />
 
                         <Text style={styles.tituloPlantao}>
@@ -257,7 +257,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="thumbs-up-outline"
                             size={20}
-                            color="#64748b"
+                            color={colors.textSecondary}
                         />
                     </Pressable>
 
@@ -265,7 +265,7 @@ export default function SuporteScreen() {
                         <Ionicons
                             name="thumbs-down-outline"
                             size={20}
-                            color="#64748b"
+                            color={colors.textSecondary}
                         />
                     </Pressable>
 

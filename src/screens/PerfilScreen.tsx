@@ -2,14 +2,19 @@ import { ReactNode, useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppTheme } from '@/contexts/ThemeContext';
-
-const primary = '#02719c';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 type IconName = keyof typeof Ionicons.glyphMap;
 
 export default function PerfilScreen() {
-  const { colors } = useAppTheme();
+  const { colors, isDark } = useAppTheme();
+  const primary = colors.accent;
+  const styles = makeStyles(colors, isDark);
+  const { session } = useAuth();
   const [nearbyAlert, setNearbyAlert] = useState(true);
+  const nomeUsuario = session?.user.user_metadata?.full_name || 'Usuário';
+  const emailUsuario = session?.user.email || '';
 
   const notice = (title: string) => Alert.alert(title, 'Esta opção estará disponível em breve.');
   const sectionTitle = (icon: IconName, title: string, trailing?: string) => (
@@ -41,17 +46,34 @@ export default function PerfilScreen() {
       <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>
         <View style={styles.identity}>
           <Pressable onPress={() => notice('Foto de perfil')} accessibilityRole="button" accessibilityLabel="Alterar foto de perfil" style={styles.avatar}><Ionicons name="person" size={42} color={primary} /><View style={styles.camera}><Ionicons name="camera" size={15} color="#fff" /></View></Pressable>
-          <View style={styles.nameLine}><Text style={[styles.name, { color: colors.text }]}>Mateus Silva</Text><Ionicons name="checkmark-circle" size={20} color={primary} /></View>
-          <Text style={[styles.member, { color: colors.textSecondary }]}>Passageiro Frequente • Membro desde Jan 2024</Text>
+          <View style={styles.nameLine}><Text style={[styles.name, { color: colors.text }]}>{nomeUsuario}</Text><Ionicons name="checkmark-circle" size={20} color={primary} /></View>
+          <Text style={[styles.member, { color: colors.textSecondary }]}>{emailUsuario}</Text>
           <View style={[styles.personalData, { backgroundColor: colors.backgroundElement }]}>
             <Ionicons name="id-card-outline" size={16} color={primary} />
-            <Text style={[styles.personalDataText, { color: colors.textSecondary }]}>CPF: ***.482.910-** • mateus.silva@email.com</Text>
+            <Text style={[styles.personalDataText, { color: colors.textSecondary }]}>Conta pessoal</Text>
           </View>
         </View>
         <Pressable onPress={() => notice('Editar dados pessoais')} style={[styles.editButton, { backgroundColor: colors.backgroundElement, borderColor: colors.border }]}>
           <Ionicons name="create-outline" size={18} color={primary} /><Text style={styles.editText}>Editar Dados Pessoais</Text>
         </Pressable>
       </View>
+
+      <Pressable onPress={() => {
+        Alert.alert('Sair da conta', 'Deseja encerrar sua sessão?', [
+          { text: 'Cancelar', style: 'cancel' },
+          {
+            text: 'Sair',
+            style: 'destructive',
+            onPress: async () => {
+              const { error } = await supabase.auth.signOut();
+              if (error) Alert.alert('Não foi possível sair', 'Tente novamente.');
+            },
+          },
+        ]);
+      }} style={styles.logoutButton} accessibilityRole="button">
+        <Ionicons name="log-out-outline" size={20} color={isDark ? '#fca5a5' : '#dc2626'} />
+        <Text style={styles.logoutText}>Sair da Conta</Text>
+      </Pressable>
 
       <View style={styles.membershipCard}>
         <View style={styles.membershipTop}>
@@ -87,7 +109,7 @@ export default function PerfilScreen() {
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
           {settingRow('time-outline', 'Horários Habituais', 'Ida: 07h45 • Volta: 18h20', undefined, () => notice('Horários habituais'))}
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
-          {settingRow('notifications-outline', 'Aviso de Aproximação', 'Alertar quando a van estiver a 5 min', <Switch value={nearbyAlert} onValueChange={setNearbyAlert} trackColor={{ false: '#cbd5e1', true: primary }} thumbColor="#fff" accessibilityLabel="Aviso de aproximação" />)}
+          {settingRow('notifications-outline', 'Aviso de Aproximação', 'Alertar quando a van estiver a 5 min', <Switch value={nearbyAlert} onValueChange={setNearbyAlert} trackColor={{ false: isDark ? '#475569' : '#cbd5e1', true: isDark ? '#02719c' : primary }} thumbColor="#fff" accessibilityLabel="Aviso de aproximação" />)}
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
           {settingRow('accessibility-outline', 'Acessibilidade e Assento', 'Janela esquerda • Ar condicionado padrão', undefined, () => notice('Acessibilidade e assento'))}
         </View>
@@ -109,23 +131,22 @@ export default function PerfilScreen() {
         <View style={styles.settingCopy}><Text style={[styles.rowTitle, { color: colors.text }]}>Ajuda e Suporte ao Cliente</Text><Text style={[styles.rowSubtitle, { color: colors.textSecondary }]}>Atendimento 24h para passageiros</Text></View>
         <Ionicons name="chevron-forward" size={19} color={colors.textSecondary} />
       </Pressable>
-      <Pressable onPress={() => Alert.alert('Sair da conta', 'A opção de sair será conectada à autenticação do aplicativo.')} style={styles.logoutButton}>
-        <Ionicons name="log-out-outline" size={20} color="#dc2626" /><Text style={styles.logoutText}>Sair da Conta</Text>
-      </Pressable>
       <Text style={styles.version}>Veloce Transit v2.4.1 (Build 842)</Text>
     </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
+function makeStyles(colors: ReturnType<typeof useAppTheme>['colors'], isDark: boolean) {
+  const primary = colors.accent;
+  return StyleSheet.create({
   content: { padding: 18, paddingBottom: 30, gap: 18 },
   heading: { gap: 4, marginBottom: 1 },
   pageTitle: { fontSize: 25, fontWeight: '800' },
   pageSubtitle: { fontSize: 13 },
   card: { borderWidth: 1, borderRadius: 20, padding: 18 },
   identity: { alignItems: 'center' },
-  avatar: { width: 96, height: 96, borderRadius: 48, backgroundColor: '#e0f2fe', borderWidth: 4, borderColor: '#fff', alignItems: 'center', justifyContent: 'center', marginBottom: 10 },
-  camera: { position: 'absolute', right: -1, bottom: 1, width: 30, height: 30, borderRadius: 15, backgroundColor: primary, borderWidth: 2, borderColor: '#fff', alignItems: 'center', justifyContent: 'center' },
+  avatar: { width: 96, height: 96, borderRadius: 48, backgroundColor: colors.accentSoft, borderWidth: 4, borderColor: colors.card, alignItems: 'center', justifyContent: 'center', marginBottom: 10 },
+  camera: { position: 'absolute', right: -1, bottom: 1, width: 30, height: 30, borderRadius: 15, backgroundColor: primary, borderWidth: 2, borderColor: colors.card, alignItems: 'center', justifyContent: 'center' },
   nameLine: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   name: { fontSize: 22, fontWeight: '700' },
   member: { fontSize: 12, marginTop: 4, textAlign: 'center' },
@@ -133,7 +154,7 @@ const styles = StyleSheet.create({
   personalDataText: { fontSize: 11, flexShrink: 1 },
   editButton: { marginTop: 16, minHeight: 46, borderRadius: 12, borderWidth: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8 },
   editText: { color: primary, fontSize: 14, fontWeight: '700' },
-  membershipCard: { backgroundColor: primary, borderRadius: 20, padding: 18 },
+  membershipCard: { backgroundColor: isDark ? '#16475a' : primary, borderRadius: 20, padding: 18 },
   membershipTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   activePill: { backgroundColor: 'rgba(255,255,255,0.16)', flexDirection: 'row', alignItems: 'center', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 7, gap: 7 },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#10b981' },
@@ -141,30 +162,31 @@ const styles = StyleSheet.create({
   fleetIcon: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.18)' },
   tripCount: { fontSize: 38, fontWeight: '800', color: '#fff', marginTop: 8 },
   tripCaption: { color: 'rgba(255,255,255,0.9)', fontSize: 13, marginTop: -3 },
-  passButton: { backgroundColor: '#fff', borderRadius: 12, paddingHorizontal: 13, minHeight: 46, flexDirection: 'row', alignItems: 'center', gap: 9, marginTop: 16 },
-  passText: { color: primary, fontSize: 14, fontWeight: '700', flex: 1 },
+  passButton: { backgroundColor: colors.background, borderRadius: 12, paddingHorizontal: 13, minHeight: 46, flexDirection: 'row', alignItems: 'center', gap: 9, marginTop: 16 },
+  passText: { color: colors.text, fontSize: 14, fontWeight: '700', flex: 1 },
   section: { gap: 11 },
   sectionTitleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 25 },
   sectionTitle: { fontSize: 16, fontWeight: '700', flex: 1 },
   trailing: { color: primary, fontSize: 12, fontWeight: '600' },
   groupCard: { borderRadius: 16, borderWidth: 1, paddingHorizontal: 12 },
   settingRow: { flexDirection: 'row', alignItems: 'center', minHeight: 66, gap: 11, paddingVertical: 9 },
-  settingIcon: { width: 38, height: 38, borderRadius: 12, backgroundColor: '#e0f2fe', alignItems: 'center', justifyContent: 'center' },
+  settingIcon: { width: 38, height: 38, borderRadius: 12, backgroundColor: colors.accentSoft, alignItems: 'center', justifyContent: 'center' },
   settingCopy: { flex: 1, gap: 3 },
   rowTitle: { fontSize: 13, fontWeight: '600' },
   rowSubtitle: { fontSize: 11 },
   divider: { height: StyleSheet.hairlineWidth, marginLeft: 49 },
-  badgeBlue: { backgroundColor: '#e0f2fe', borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5 },
+  badgeBlue: { backgroundColor: colors.accentSoft, borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5 },
   badgeBlueText: { color: primary, fontSize: 10, fontWeight: '700' },
-  badgeGreen: { backgroundColor: '#d1fae5', borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5 },
-  badgeGreenText: { color: '#047857', fontSize: 10, fontWeight: '700' },
+  badgeGreen: { backgroundColor: isDark ? '#12372d' : '#d1fae5', borderRadius: 12, paddingHorizontal: 9, paddingVertical: 5 },
+  badgeGreenText: { color: isDark ? '#6ee7b7' : '#047857', fontSize: 10, fontWeight: '700' },
   addMethod: { minHeight: 43, borderRadius: 11, borderWidth: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7 },
   addMethodText: { color: primary, fontWeight: '600', fontSize: 12 },
   receipts: { flexDirection: 'row', alignItems: 'center', gap: 7, paddingVertical: 4 },
   receiptsText: { fontSize: 10, flex: 1 },
   link: { color: primary, fontSize: 11, fontWeight: '700' },
   supportCard: { borderRadius: 15, borderWidth: 1, minHeight: 68, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, gap: 11 },
-  logoutButton: { minHeight: 48, borderRadius: 12, borderWidth: 1, borderColor: '#fecaca', backgroundColor: '#fee2e2', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
-  logoutText: { color: '#b91c1c', fontSize: 14, fontWeight: '700' },
-  version: { color: '#94a3b8', textAlign: 'center', fontSize: 11, marginTop: -7 },
-});
+  logoutButton: { minHeight: 48, borderRadius: 12, borderWidth: 1, borderColor: isDark ? '#7f1d1d' : '#fecaca', backgroundColor: isDark ? '#3b2025' : '#fee2e2', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  logoutText: { color: isDark ? '#fca5a5' : '#b91c1c', fontSize: 14, fontWeight: '700' },
+  version: { color: colors.textSecondary, textAlign: 'center', fontSize: 11, marginTop: -7 },
+  });
+}
