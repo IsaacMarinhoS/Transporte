@@ -35,11 +35,8 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
 
     // MENU INFERIOR
     menuinferior: {
-        position: 'absolute',
-        bottom: 0,
-
         width: '100%',
-        height: 110,
+        height: 70,
 
         backgroundColor: colors.backgroundElement,
 
@@ -147,6 +144,20 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 12,
         color: colors.text,
+    },
+
+    estadoPlanos: {
+        minHeight: 120,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 10,
+        paddingHorizontal: 20,
+    },
+
+    textoEstadoPlanos: {
+        color: colors.textSecondary,
+        fontSize: 12,
+        textAlign: 'center',
     },
 
     cardPlano: {
@@ -424,7 +435,7 @@ export const createHomeStyles = (colors: ThemePalette) => StyleSheet.create({
     },
 
     conteudoScroll: {
-        paddingBottom: 70,
+        paddingBottom: 20,
     },
 
     marcadorMenu: {

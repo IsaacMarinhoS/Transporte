@@ -4,7 +4,6 @@ import {
   Text,
   Pressable,
   ScrollView,
-  Image,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,11 +12,18 @@ import { router } from 'expo-router';
 
 import { createPasseDigitalStyles } from '../styles/passedigital';
 import { useAppTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function PasseDigital() {
   const insets = useSafeAreaInsets();
   const { colors, isDark } = useAppTheme();
+  const { session } = useAuth();
   const themedStyles = createPasseDigitalStyles(colors, isDark);
+  const userId = session?.user.id ?? '';
+  const nomeTitular = session?.user.user_metadata?.full_name?.trim()
+    || session?.user.email?.split('@')[0]
+    || 'Passageiro';
+  const codigoPasse = userId ? `VLC-${userId.replace(/-/g, '').slice(0, 8).toUpperCase()}` : 'VLC-PASSE';
 
   return (
     <View style={themedStyles.container}>
@@ -83,14 +89,13 @@ export default function PasseDigital() {
               <View style={themedStyles.secaoPassageiro}>
                 {/* IDENTIFICAÇÃO DO PASSAGEIRO */}
                 <View style={themedStyles.identificacao}>
-                  <Image
-                    source={{ uri: 'https://github.com/github.png' }}
-                    style={themedStyles.avatar}
-                  />
+                  <View style={themedStyles.avatar}>
+                    <Ionicons name="person" size={28} color={colors.accent} />
+                  </View>
                   <View style={themedStyles.dadosPassageiro}>
-                    <Text style={themedStyles.nomeTitular}>Mateus Silva</Text>
-                    <Text style={themedStyles.categoriaUsuario}>Passageiro Frequente</Text>
-                    <Text style={themedStyles.documentoProtegido}>CPF ***.482.918-**</Text>
+                    <Text style={themedStyles.nomeTitular} numberOfLines={1}>{nomeTitular}</Text>
+                    <Text style={themedStyles.categoriaUsuario}>Passe pessoal</Text>
+                    <Text style={themedStyles.documentoProtegido}>Identificação individual</Text>
                   </View>
                 </View>
 
@@ -120,7 +125,7 @@ export default function PasseDigital() {
               <View style={themedStyles.secaoQR}>
                 <View style={themedStyles.containerQR}>
                   <QRCode
-                    value="VLC-8842-SP-MATEUS-SILVA"
+                    value={userId ? `veloce-pass:${userId}` : 'veloce-pass:unavailable'}
                     size={120}
                     color="#0f172a"
                     backgroundColor="#ffffff"
@@ -129,7 +134,7 @@ export default function PasseDigital() {
                 </View>
 
                 <View style={themedStyles.infoQR}>
-                  <Text style={themedStyles.codigoContingencia}>#VLC-8842-SP</Text>
+                  <Text style={themedStyles.codigoContingencia}>#{codigoPasse}</Text>
                   <View style={themedStyles.tokenDinamico}>
                     <Ionicons name="sync-outline" size={12} color={colors.textSecondary} />
                     <Text style={themedStyles.textoToken}>Renova em 45s</Text>

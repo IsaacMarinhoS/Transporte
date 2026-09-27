@@ -61,7 +61,11 @@ export default function Home() {
             <View
                 style={[
                     styles.menuinferior,
-                    { paddingBottom: insets.bottom, backgroundColor: colors.backgroundElement }
+                    {
+                        height: 70 + insets.bottom,
+                        paddingBottom: insets.bottom,
+                        backgroundColor: colors.backgroundElement,
+                    }
                 ]}
             >
 

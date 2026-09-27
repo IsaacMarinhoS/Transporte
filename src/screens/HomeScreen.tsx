@@ -1,15 +1,67 @@
-import { Text, View, FlatList, Pressable, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, Text, View, FlatList, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { createHomeStyles } from '../styles/home';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import QRCode from 'react-native-qrcode-svg';
 import { router } from 'expo-router';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
+
+type HomePlan = {
+    id: string;
+    name: string;
+    description: string;
+    price_cents: number;
+    billing_period: 'monthly' | 'semester' | 'one_time';
+    benefits: string[];
+};
+
+function formatPrice(priceCents: number) {
+    return `R$ ${(priceCents / 100).toFixed(2).replace('.', ',')}`;
+}
 
 export default function HomeScreen() {
     const { colors } = useAppTheme();
+    const { session } = useAuth();
     const styles = createHomeStyles(colors);
+    const userId = session?.user.id ?? '';
+    const nomeTitular = session?.user.user_metadata?.full_name?.trim()
+        || session?.user.email?.split('@')[0]
+        || 'Passageiro';
+    const codigoPasse = userId ? `VLC-${userId.replace(/-/g, '').slice(0, 8).toUpperCase()}` : 'VLC-PASSE';
+    const [plans, setPlans] = useState<HomePlan[]>([]);
+    const [loadingPlans, setLoadingPlans] = useState(true);
+    const [plansError, setPlansError] = useState(false);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadPlans = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('plans')
+                    .select('id, name, description, price_cents, billing_period, benefits')
+                    .eq('active', true)
+                    .order('price_cents', { ascending: true });
+
+                if (error) throw error;
+                if (isMounted) setPlans((data ?? []) as HomePlan[]);
+            } catch (error) {
+                console.warn('Não foi possível carregar os planos da Home:', error);
+                if (isMounted) setPlansError(true);
+            } finally {
+                if (isMounted) setLoadingPlans(false);
+            }
+        };
+
+        void loadPlans();
+        return () => { isMounted = false; };
+    }, []);
+
     return (
         <ScrollView
+            style={{ flex: 1 }}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.conteudoScroll}
         >
@@ -51,11 +103,11 @@ export default function HomeScreen() {
 
                             <View style={styles.dadosTitular}>
                                 <Text style={styles.nomeTitular}>
-                                    Junior Silveira
+                                    {nomeTitular}
                                 </Text>
 
                                 <Text style={styles.idTitular}>
-                                    ID: #VTC-84920
+                                    ID: #{codigoPasse}
                                 </Text>
                             </View>
 
@@ -75,7 +127,7 @@ export default function HomeScreen() {
 
                                 <View style={styles.qrBox}>
                                     <QRCode
-                                        value="VTC-84920-ISAAC-SILVEIRA"
+                                        value={userId ? `veloce-pass:${userId}` : 'veloce-pass:unavailable'}
                                         size={68}
                                         color="#0f172a"
                                         backgroundColor="#ffffff"
@@ -165,61 +217,53 @@ export default function HomeScreen() {
                             Planos
                         </Text>
 
-                        <FlatList
-                            data={[
-                                {
-                                    id: '1',
-                                    nome: 'Plano Básico',
-                                    preco: 'R$ 99,90',
-                                },
-                                {
-                                    id: '2',
-                                    nome: 'Plano Conforto',
-                                    preco: 'R$ 149,90',
-                                },
-                                {
-                                    id: '3',
-                                    nome: 'Plano Premium',
-                                    preco: 'R$ 199,90',
-                                },
-                            ]}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
-                                <View style={styles.cardPlano}>
+                        {loadingPlans ? (
+                            <View style={styles.estadoPlanos}>
+                                <ActivityIndicator color={colors.accent} />
+                                <Text style={styles.textoEstadoPlanos}>Carregando planos...</Text>
+                            </View>
+                        ) : plansError ? (
+                            <Text style={styles.textoEstadoPlanos}>Não foi possível carregar os planos agora.</Text>
+                        ) : plans.length === 0 ? (
+                            <Text style={styles.textoEstadoPlanos}>Nenhum plano disponível no momento.</Text>
+                        ) : (
+                            <FlatList
+                                data={plans}
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                keyExtractor={(item) => item.id}
+                                renderItem={({ item }) => {
+                                    const benefits = Array.isArray(item.benefits)
+                                        ? item.benefits.filter((benefit) => typeof benefit === 'string').slice(0, 3)
+                                        : [];
+                                    const period = item.billing_period === 'monthly'
+                                        ? 'por mês'
+                                        : item.billing_period === 'semester' ? 'por semestre' : 'pagamento único';
 
-                                    <Text style={styles.nomePlano}>
-                                        {item.nome}
-                                    </Text>
-
-                                    <Text style={styles.descricaoPlano}>
-                                        Transporte mensal com conforto e praticidade.
-                                    </Text>
-
-                                    <Text style={styles.precoPlano}>
-                                        {item.preco}
-                                    </Text>
-
-                                    <Text style={styles.mensalidade}>
-                                        por mês
-                                    </Text>
-
-                                    <View style={styles.beneficios}>
-                                        <Text style={styles.beneficio}>✓ Rotas selecionadas</Text>
-                                        <Text style={styles.beneficio}>✓ Viagens mensais</Text>
-                                        <Text style={styles.beneficio}>✓ Suporte pelo aplicativo</Text>
-                                    </View>
-
-                                    <Pressable style={styles.botaoContratar}>
-                                        <Text style={styles.textoBotao}>
-                                            Quero contratar
-                                        </Text>
-                                    </Pressable>
-
-                                </View>
-                            )}
-                        />
+                                    return (
+                                        <View style={styles.cardPlano}>
+                                            <Text style={styles.nomePlano}>{item.name}</Text>
+                                            <Text style={styles.descricaoPlano}>{item.description}</Text>
+                                            <Text style={styles.precoPlano}>{formatPrice(item.price_cents)}</Text>
+                                            <Text style={styles.mensalidade}>{period}</Text>
+                                            {benefits.length > 0 && (
+                                                <View style={styles.beneficios}>
+                                                    {benefits.map((benefit, index) => (
+                                                        <Text key={`${item.id}-benefit-${index}`} style={styles.beneficio}>✓ {benefit}</Text>
+                                                    ))}
+                                                </View>
+                                            )}
+                                            <Pressable
+                                                style={styles.botaoContratar}
+                                                onPress={() => Alert.alert(item.name, 'A contratação pelo aplicativo ainda será integrada.')}
+                                            >
+                                                <Text style={styles.textoBotao}>Saiba mais</Text>
+                                            </Pressable>
+                                        </View>
+                                    );
+                                }}
+                            />
+                        )}
 
                     </View>
 

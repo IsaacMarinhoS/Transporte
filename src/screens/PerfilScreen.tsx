@@ -37,7 +37,7 @@ export default function PerfilScreen() {
   );
 
   return (
-    <ScrollView style={{ backgroundColor: colors.background }} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <View style={styles.heading}>
         <Text style={[styles.pageTitle, { color: colors.text }]}>Meu Perfil</Text>
         <Text style={[styles.pageSubtitle, { color: colors.textSecondary }]}>Seus dados e preferências de viagem</Text>
@@ -139,7 +139,7 @@ export default function PerfilScreen() {
 function makeStyles(colors: ReturnType<typeof useAppTheme>['colors'], isDark: boolean) {
   const primary = colors.accent;
   return StyleSheet.create({
-  content: { padding: 18, paddingBottom: 30, gap: 18 },
+  content: { padding: 18, paddingBottom: 20, gap: 18 },
   heading: { gap: 4, marginBottom: 1 },
   pageTitle: { fontSize: 25, fontWeight: '800' },
   pageSubtitle: { fontSize: 13 },

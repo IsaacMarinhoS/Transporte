@@ -15,7 +15,7 @@ export const createSuporteStyles = (colors: ThemePalette) => StyleSheet.create({
     conteudo: {
         paddingHorizontal: 20,
 
-        paddingBottom: 120,
+        paddingBottom: 20,
     },
 
 
